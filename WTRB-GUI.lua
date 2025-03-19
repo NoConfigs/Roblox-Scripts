@@ -10,11 +10,16 @@ local TextBox = Instance.new("TextBox")
 local ChangeButton = Instance.new("TextButton")
 local ResetButton = Instance.new("TextButton")
 local Title = Instance.new("TextLabel")
+local Credit = Instance.new("TextLabel")
+local PlayerListFrame = Instance.new("Frame")
+local OriginalPlayerNumberLabel = Instance.new("TextLabel")
+local CurrentPlayerNumberLabel = Instance.new("TextLabel")
+local PlayersLabelB = Instance.new("TextLabel")
 
 ScreenGui.Parent = Player:WaitForChild("PlayerGui")
 
 -- Increased frame size
-Frame.Size = UDim2.new(0, 250, 0, 390)  -- Adjusted to fit more content
+Frame.Size = UDim2.new(0, 210, 0, 390)  -- Adjusted to fit more content
 Frame.Position = UDim2.new(0.5, -150, 0.5, -225)
 Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 Frame.BorderSizePixel = 0
@@ -22,6 +27,11 @@ Frame.BackgroundTransparency = 0.1
 Frame.Active = true
 Frame.Draggable = true
 Frame.Parent = ScreenGui
+
+-- Add UICorner for rounded corners
+local frameCorner = Instance.new("UICorner")
+frameCorner.CornerRadius = UDim.new(0, 10)  -- Set the corner radius
+frameCorner.Parent = Frame
 
 Title.Size = UDim2.new(1, 0, 0, 30)
 Title.BackgroundTransparency = 1
@@ -38,12 +48,22 @@ TextBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 TextBox.Parent = Frame
 
+-- Add UICorner for rounded corners on TextBox
+local textBoxCorner = Instance.new("UICorner")
+textBoxCorner.CornerRadius = UDim.new(0, 8)  -- Set the corner radius for the textbox
+textBoxCorner.Parent = TextBox
+
 ChangeButton.Size = UDim2.new(1, -20, 0, 30)
 ChangeButton.Position = UDim2.new(0, 10, 0, 80)
 ChangeButton.Text = "Change PlayerNum"
 ChangeButton.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
 ChangeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 ChangeButton.Parent = Frame
+
+-- Add UICorner for rounded corners on ChangeButton
+local changeButtonCorner = Instance.new("UICorner")
+changeButtonCorner.CornerRadius = UDim.new(0, 8)  -- Set the corner radius for the button
+changeButtonCorner.Parent = ChangeButton
 
 ResetButton.Size = UDim2.new(1, -20, 0, 30)
 ResetButton.Position = UDim2.new(0, 10, 0, 120)
@@ -52,7 +72,11 @@ ResetButton.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
 ResetButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 ResetButton.Parent = Frame
 
-local Credit = Instance.new("TextLabel")
+-- Add UICorner for rounded corners on ResetButton
+local resetButtonCorner = Instance.new("UICorner")
+resetButtonCorner.CornerRadius = UDim.new(0, 8)  -- Set the corner radius for the button
+resetButtonCorner.Parent = ResetButton
+
 Credit.Size = UDim2.new(1, 0, 0, 20)
 Credit.Position = UDim2.new(0, 0, 1, -20)
 Credit.BackgroundTransparency = 1
@@ -63,11 +87,15 @@ Credit.Font = Enum.Font.SourceSansItalic
 Credit.Parent = Frame
 
 -- Player list display section
-local PlayerListFrame = Instance.new("Frame")  -- Changed from ScrollingFrame to regular Frame
 PlayerListFrame.Size = UDim2.new(1, -20, 0, 160)  -- Adjusted size for player list display
 PlayerListFrame.Position = UDim2.new(0, 10, 0, 195)
 PlayerListFrame.BackgroundTransparency = 1
 PlayerListFrame.Parent = Frame
+
+-- Add UICorner for rounded corners on PlayerListFrame
+local playerListFrameCorner = Instance.new("UICorner")
+playerListFrameCorner.CornerRadius = UDim.new(0, 8)  -- Set the corner radius for the player list frame
+playerListFrameCorner.Parent = PlayerListFrame
 
 -- Store player labels in a table to avoid duplicates
 local playerLabels = {}
@@ -143,7 +171,6 @@ end)
 updatePlayerList()
 
 -- Player number update section (Moved below buttons)
-local OriginalPlayerNumberLabel = Instance.new("TextLabel")
 OriginalPlayerNumberLabel.Size = UDim2.new(1, -20, 0, 30)
 OriginalPlayerNumberLabel.Position = UDim2.new(0, 10, 0, 164)
 OriginalPlayerNumberLabel.BackgroundTransparency = 1
@@ -153,7 +180,6 @@ OriginalPlayerNumberLabel.TextSize = 14
 OriginalPlayerNumberLabel.Font = Enum.Font.SourceSans
 OriginalPlayerNumberLabel.Parent = Frame
 
-local CurrentPlayerNumberLabel = Instance.new("TextLabel")
 CurrentPlayerNumberLabel.Size = UDim2.new(1, -20, 0, 30)
 CurrentPlayerNumberLabel.Position = UDim2.new(0, 10, 0, 148)
 CurrentPlayerNumberLabel.BackgroundTransparency = 1
@@ -163,7 +189,6 @@ CurrentPlayerNumberLabel.TextSize = 14
 CurrentPlayerNumberLabel.Font = Enum.Font.SourceSans
 CurrentPlayerNumberLabel.Parent = Frame
 
-local PlayersLabelB = Instance.new("TextLabel")
 PlayersLabelB.Size = UDim2.new(1, -20, 0, 30)
 PlayersLabelB.Position = UDim2.new(0, 10, 0, 179)
 PlayersLabelB.TextColor3 = Color3.fromRGB(0, 255, 255)
