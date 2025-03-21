@@ -1,8 +1,11 @@
+-- made by Volatile :)
+
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local UserInputService = game:GetService("UserInputService")
 
 local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.ResetOnSpawn = false -- This makes the GUI persist after death
 local Frame = Instance.new("Frame")
 local TextBox = Instance.new("TextBox")
 local ChangeButton = Instance.new("TextButton")
