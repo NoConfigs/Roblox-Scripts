@@ -1,11 +1,10 @@
--- made by Volatile :)
-
+--Made By Volatile :)
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local UserInputService = game:GetService("UserInputService")
 
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.ResetOnSpawn = false -- This makes the GUI persist after death
+ScreenGui.ResetOnSpawn = false
 local Frame = Instance.new("Frame")
 local TextBox = Instance.new("TextBox")
 local ChangeButton = Instance.new("TextButton")
@@ -16,10 +15,12 @@ local PlayerListFrame = Instance.new("Frame")
 local OriginalPlayerNumberLabel = Instance.new("TextLabel")
 local CurrentPlayerNumberLabel = Instance.new("TextLabel")
 local PlayersLabelB = Instance.new("TextLabel")
+local MoreOptionsButton = Instance.new("TextButton")
+local MoreOptionsFrame = Instance.new("Frame")
 
 ScreenGui.Parent = Player:WaitForChild("PlayerGui")
 
-Frame.Size = UDim2.new(0, 210, 0, 390)
+Frame.Size = UDim2.new(0, 210, 0, 400)
 Frame.Position = UDim2.new(0.5, -150, 0.5, -225)
 Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 Frame.BorderSizePixel = 0
@@ -180,12 +181,53 @@ PlayersLabelB.Font = Enum.Font.SourceSans
 PlayersLabelB.Parent = Frame
 PlayersLabelB.BackgroundTransparency = 1
 
+MoreOptionsButton.Size = UDim2.new(1, -20, 0, 25)
+MoreOptionsButton.Position = UDim2.new(0, 10, 0, 355)
+MoreOptionsButton.Text = "More Options"
+MoreOptionsButton.BackgroundColor3 = Color3.fromRGB(55, 34, 555)
+MoreOptionsButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+MoreOptionsButton.Parent = Frame
+
+MoreOptionsFrame.Size = UDim2.new(0, 210, 0, 90)
+MoreOptionsFrame.Position = UDim2.new(0.5, -150, 0.5, 100)
+MoreOptionsFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+MoreOptionsFrame.Visible = false
+MoreOptionsFrame.Parent = ScreenGui
+
+local moreOptionsTitle = Instance.new("TextLabel")
+moreOptionsTitle.Size = UDim2.new(1, 0, 0, 30)
+moreOptionsTitle.Text = "Additional Options"
+moreOptionsTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+moreOptionsTitle.TextSize = 16
+moreOptionsTitle.Font = Enum.Font.SourceSansBold
+moreOptionsTitle.BackgroundTransparency = 1
+moreOptionsTitle.Parent = MoreOptionsFrame
+
+local optionButton1 = Instance.new("TextButton")
+optionButton1.Size = UDim2.new(1, -20, 0, 30)
+optionButton1.Position = UDim2.new(0, 10, 0, 40)
+optionButton1.Text = "Send Likes to Username"
+optionButton1.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+optionButton1.TextColor3 = Color3.fromRGB(255, 255, 255)
+optionButton1.Parent = MoreOptionsFrame
+
+local optionButton2 = Instance.new("TextButton")
+optionButton2.Size = UDim2.new(1, -20, 0, 30)
+optionButton2.Position = UDim2.new(0, 10, 0, 70)
+optionButton2.Text = "TEXTBOX HERE"
+optionButton2.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+optionButton2.TextColor3 = Color3.fromRGB(255, 255, 255)
+optionButton2.Parent = MoreOptionsFrame
+
+MoreOptionsButton.MouseButton1Click:Connect(function()
+    MoreOptionsFrame.Visible = not MoreOptionsFrame.Visible
+end)
+
 local playerNo = Player:FindFirstChild("playerNumber")
 local OrigPlayerNum = nil
 
 if playerNo then
     OrigPlayerNum = playerNo.Value
-    print("Original Player Number: " .. OrigPlayerNum)
     OriginalPlayerNumberLabel.Text = "Original PlayerNum: " .. OrigPlayerNum
     CurrentPlayerNumberLabel.Text = "Current PlayerNum: " .. playerNo.Value
 else
@@ -196,7 +238,6 @@ ChangeButton.MouseButton1Click:Connect(function()
     local newNum = tonumber(TextBox.Text)
     if newNum and newNum >= 1 and newNum <= 9 then
         playerNo.Value = newNum
-        print("Player number changed to: " .. newNum)
         CurrentPlayerNumberLabel.Text = "Current PlayerNum: " .. newNum
     else
         print("Invalid player number. Enter a number between 1-9.")
@@ -206,7 +247,6 @@ end)
 ResetButton.MouseButton1Click:Connect(function()
     if OrigPlayerNum and playerNo then
         playerNo.Value = OrigPlayerNum
-        print("Player number reset to: " .. OrigPlayerNum)
         CurrentPlayerNumberLabel.Text = "Current PlayerNum: " .. OrigPlayerNum
     else
         print("Cannot reset - original number unknown.")
